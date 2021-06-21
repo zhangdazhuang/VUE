@@ -2,6 +2,8 @@ import requests
 import json
 import os
 
+from dataset import DataManager
+db = DataManager()
 
 ## https://www.cingta.com/school/ser  ## 原网址 
 ## 在网址中发现所需数据请求来自于 https://www.cingta.com/school/api/name_uni_list/
@@ -35,6 +37,8 @@ for each in data['data']['list']:
     level = each['level']
     type = each['type']
     link = each['link']
-    school_data = (lineid, code, schoolname, province, city, department, level, type, link)
+    alldata = (lineid, code, schoolname, province, city, department, level, type, link)
 
+    sql = 'insert into collegesList(lineid, code, schoolname, province, city, department, level, type, link) values(%s, %s, %s, %s, %s, %s, %s, %s, %s);'
+    db.save_data(sql, alldata)
 
