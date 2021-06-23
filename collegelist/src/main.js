@@ -7,18 +7,22 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-// import http from '@/api/config.js'
+//引入iconfont
+// import './assets/font/iconfont.css' 
+import './assets/font/iconfont.js' 
 
-// import ElementUI from 'element-ui';
-// import 'element-ui/lib/theme-chalk/index.css';
+import http from '@/api/config.js'  //跨域请求
+
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.config.productionTip = false
 
-// Vue.use(ElementUI)
-// Vue.prototype.$http = http
+Vue.use(ElementUI)
+Vue.prototype.$http = http
 
 new Vue({
-  router,
-  store,
-  render: h => h(App)
+    router,
+    store,
+    render: h => h(App)
 }).$mount('#app')

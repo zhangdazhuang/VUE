@@ -1,0 +1,86 @@
+{
+  "id": "2629355",
+  "name": "VUE图标",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "3814620",
+      "name": "消息",
+      "font_class": "xiaoxi",
+      "unicode": "e709",
+      "unicode_decimal": 59145
+    },
+    {
+      "icon_id": "3815234",
+      "name": "心",
+      "font_class": "xin",
+      "unicode": "e70c",
+      "unicode_decimal": 59148
+    },
+    {
+      "icon_id": "3815540",
+      "name": "取消",
+      "font_class": "quxiao",
+      "unicode": "e70d",
+      "unicode_decimal": 59149
+    },
+    {
+      "icon_id": "3815754",
+      "name": "勾选",
+      "font_class": "gouxuan",
+      "unicode": "e70f",
+      "unicode_decimal": 59151
+    },
+    {
+      "icon_id": "3815874",
+      "name": "播放",
+      "font_class": "bofang",
+      "unicode": "e710",
+      "unicode_decimal": 59152
+    },
+    {
+      "icon_id": "3816093",
+      "name": "增加",
+      "font_class": "zengjia",
+      "unicode": "e711",
+      "unicode_decimal": 59153
+    },
+    {
+      "icon_id": "3816121",
+      "name": "减少",
+      "font_class": "jianshao",
+      "unicode": "e712",
+      "unicode_decimal": 59154
+    },
+    {
+      "icon_id": "3816323",
+      "name": "设置",
+      "font_class": "shezhi",
+      "unicode": "e713",
+      "unicode_decimal": 59155
+    },
+    {
+      "icon_id": "3816398",
+      "name": "电脑",
+      "font_class": "diannao",
+      "unicode": "e714",
+      "unicode_decimal": 59156
+    },
+    {
+      "icon_id": "3816501",
+      "name": "文档",
+      "font_class": "wendang",
+      "unicode": "e716",
+      "unicode_decimal": 59158
+    },
+    {
+      "icon_id": "3819773",
+      "name": "文件",
+      "font_class": "wenjian",
+      "unicode": "e71e",
+      "unicode_decimal": 59166
+    }
+  ]
+}
