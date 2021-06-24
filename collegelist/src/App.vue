@@ -6,13 +6,14 @@
               <use xlink:href="#icon-wenjian"></use>
             </svg>
             教育部全国高校名单(截止2020-06-30)
-          </td> <td style="width= 15%; ">  
-          <!-- <span @click="changeSchool()"><router-link to="">按高校查询</router-link></span>   | 
-          <span @click="changePlace()"><router-link to="">按地区查询</router-link></span>   -->
+          </td> <td style="width= 15%; text-align:right; height:35px;font-size:19px">  
+          <span @click="changeSchool()"><router-link to="">按高校查询</router-link></span>   | 
+          <span @click="changePlace()"><router-link to="">按地区查询</router-link></span>  
         </td> 
       </tr>
     </table>
-    <router-view></router-view> 
+    <!-- <router-view></router-view>  -->
+    <add/> <!--添加组件 -->
   </div>
 </template>
 
@@ -34,9 +35,25 @@
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
-}
+  }
+
 </style>
 
+<script>
+  import SchoolQuery from './components/schoolQuery.vue' 
+  import Bus from './bus'
+  export default {
+    data(){
+      return{
+        show: true, //是否显示——————标志位        
+      }
+    },
+    components:{
+      Add:SchoolQuery
+    }
+    
+  }
+</script>
 
 <!--<template>
   <div id="app">

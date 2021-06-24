@@ -13,11 +13,16 @@ const routes = [
     //     name: 'Home',
     //     component: Home
     // },
+    // {
+    //     // path: '/about',
+    //     path: '/',
+    //     name: 'About',
+    //     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    // },
     {
-        // path: '/about',
         path: '/',
-        name: 'About',
-        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+        name: 'School',
+        component: () => import(/* webpackChunkName: "about" */ '../views/School.vue')
     },
     {
         path: '/welcome',    // path 跳转地址 //新增的测试
