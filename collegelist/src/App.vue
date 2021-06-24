@@ -50,7 +50,34 @@
     },
     components:{
       Add:SchoolQuery
+    },
+      methods: {
+    getData(value){
+      if(value.name == '一流学校')
+      {
+        Bus.$emit('name', '一流大学')
+      }
+      else if(value.name == '985高校'){
+        Bus.$emit('name', '985')
+      }
+      else if(value.name == '211高校'){
+        Bus.$emit('name', '211')
+      }
+      else
+      {
+        Bus.$emit('name', value.name)
+      }
+    },
+    getPlaceData(value){
+      Bus.$emit('place', value.name)
+    },
+    changePlace(){
+      Bus.$emit('show', true)
+    },
+    changeSchool(){
+      Bus.$emit('show', false)
     }
+  },
     
   }
 </script>

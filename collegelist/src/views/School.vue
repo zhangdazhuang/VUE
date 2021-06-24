@@ -7,7 +7,7 @@
     </el-table-column>
     <el-table-column v-for="(val, key) in tableLabel" :key="key" :prop="key" :label="val" width="124"></el-table-column>
     </el-table>
-    <el-pagination v-if="show" background  layout="prev, pager, next" :total="total" :current-page="yemian_page" :page-size="60" @current-change="changerPage">
+    <el-pagination v-if="show" background  layout="prev, pager, next" :total="total" :current-page="yemian_page" :page-size="20" @current-change="changerPage">
 </el-pagination>
 </div>
 </template>
@@ -26,18 +26,19 @@ import Bus from '../bus'
         schoolList:['一流学校','一流学科','985高校','211高校'],
         tableData: [],
         tableLabel: {
-          school_code: '学校标识码',
-          school_name: '学校名称',
+          // lineid: '序号',
+          code: '学校标识码',
+          schoolname: '学校名称',
           province: '所在地区',
           city: '城市',
           department: '主管部门',
-          school_level: '办学层次',
-          school_type: '办学类型'
+          level: '办学层次',
+          type: '办学类型'
         }
       }
     },
     created() {
-      Bus.$on('yemian_page', val=> {
+      Bus.$on('yemian_page', val=> {    //接收数据（参数名称，参数）
         this.yemian_page = val
         this.show = false;//让分页隐藏
         this.$nextTick(() => {//重新渲染分页
@@ -46,38 +47,38 @@ import Bus from '../bus'
       })
       Bus.$on('name', val => {
         this.val_flag = val
-        this.$http('http://localhost:8001/user/first?type='+this.val_flag+'&page='+this.page).then(res => {
+        this.$http('http://localhost:1426/user/first?type='+this.val_flag+'&page='+this.page).then(res => {
             this.tableData = res.data
         })
-        this.$http('http://localhost:8001/user/countPlace?type='+this.val_flag).then(res => {
+        this.$http('http://localhost:1426/user/countPlace?type='+this.val_flag).then(res => {
             this.total = res.data
         })
       })
       Bus.$on('place', val =>{
         this.val_flag = val
-        this.$http('http://localhost:8001/user/second?province='+this.val_flag+'&page='+this.page).then(res => {
+        this.$http('http://localhost:1426/user/second?province='+this.val_flag+'&page='+this.page).then(res => {
             this.tableData = res.data
           })
-        this.$http('http://localhost:8001/user/countProvince?province='+this.val_flag).then(res => {
+        this.$http('http://localhost:1426/user/countProvince?province='+this.val_flag).then(res => {
             this.total = res.data
           })
       })
       Bus.$on('page', val=>{
         this.page = val
         if(this.placeList.indexOf(this.val_flag) > -1){
-          this.$http('http://localhost:8001/user/second?province='+this.val_flag+'&page='+this.page).then(res => {
+          this.$http('http://localhost:1426/user/second?province='+this.val_flag+'&page='+this.page).then(res => {
             this.tableData = res.data
           })
         }
         else if(this.schoolList.indexOf(this.val_flag) > -1){
-          this.$http('http://localhost:8001/user/first?type='+this.val_flag+'&page='+this.page).then(res => {
+          this.$http('http://localhost:1426/user/first?type='+this.val_flag+'&page='+this.page).then(res => {
             this.tableData = res.data
         })
         }
       })
     },
     mounted () {
-      this.$http('http://localhost:8001/user/first?type='+this.val_flag+'&page='+this.page).then(res => {
+      this.$http('http://localhost:1426/user/first?type='+this.val_flag+'&page='+this.page).then(res => {
         this.tableData = res.data
       })
     },
