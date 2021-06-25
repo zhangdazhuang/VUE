@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "5354181",
+      "name": "点",
+      "font_class": "dian",
+      "unicode": "e7a5",
+      "unicode_decimal": 59301
+    },
+    {
+      "icon_id": "11730026",
+      "name": "圆点",
+      "font_class": "yuandian",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "20333161",
+      "name": "圆点",
+      "font_class": "yuandian1",
+      "unicode": "e6b3",
+      "unicode_decimal": 59059
+    },
+    {
       "icon_id": "3814620",
       "name": "消息",
       "font_class": "xiaoxi",

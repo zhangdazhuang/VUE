@@ -1,14 +1,14 @@
 <template>
   <div id="app"> <!-- 每个项目只能有一个id=app-->
-    <table  width="65%" style="text-align:center;margin:0 auto;background-color: #F2F8FE;filter:brightness(1);">
+    <table  width="70%" style="text-align:center;margin:0 auto;background-color: #F2F8FE;">
       <tr><td style="text-align:left; height:35px;font-size:19px">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-wenjian"></use>
             </svg>
-            教育部全国高校名单(截止2020-06-30)
+            <font style="font-size:15px">教育部全国高校名单(截至{{updateTime}})</font>
           </td> <td style="width= 15%; text-align:right; height:35px;font-size:19px">  
-          <span @click="changeSchool()"><router-link to="">按高校查询</router-link></span>   | 
-          <span @click="changePlace()"><router-link to="">按地区查询</router-link></span>  
+          <span  @click="changeSchool()"><router-link to=""><font style="font-size:15px">按高校查询</font></router-link></span>   | 
+          <span @click="changePlace()"><router-link to=""><font style="font-size:15px">按地区查询</font></router-link></span>  
         </td> 
       </tr>
     </table>
@@ -17,17 +17,13 @@
   </div>
 </template>
 
-<script>
-
-</script>
-
 <style lang="less">
   #app {  //id = 'app'
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
+    color: #010102;
   }
   .icon { // class="icon"
   width: 1em;
@@ -45,39 +41,32 @@
   export default {
     data(){
       return{
-        show: true, //是否显示——————标志位        
+        show: true,    
+        updateTime:""    
       }
     },
     components:{
       Add:SchoolQuery
     },
-      methods: {
-    getData(value){
-      if(value.name == '一流学校')
-      {
-        Bus.$emit('name', '一流大学')
-      }
-      else if(value.name == '985高校'){
-        Bus.$emit('name', '985')
-      }
-      else if(value.name == '211高校'){
-        Bus.$emit('name', '211')
-      }
-      else
-      {
-        Bus.$emit('name', value.name)
-      }
+    methods: {
+      changePlace(){
+        Bus.$emit('show', true)
+      },
+      changeSchool(){
+        Bus.$emit('show', false)
+      },
     },
-    getPlaceData(value){
-      Bus.$emit('place', value.name)
-    },
-    changePlace(){
-      Bus.$emit('show', true)
-    },
-    changeSchool(){
-      Bus.$emit('show', false)
+    mounted(){     
+      const nowDate = new Date();
+      const date = {
+        year: nowDate.getFullYear(),
+        month: nowDate.getMonth() + 1,
+        date: nowDate.getDate(),
+      }
+      const newmonth = date.month>10?date.month:'0'+date.month
+      const day = date.date>10?date.date:'0'+date.date
+      this.updateTime = date.year + '-' + newmonth + '-' + day
     }
-  },
     
   }
 </script>
