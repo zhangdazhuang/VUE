@@ -1,4 +1,3 @@
-<!--  -->
 <template>
   <el-form :inline="true" class="demo-form-inline" style="display:block;" >
     <el-input v-model="place" placeholder="请输入关键字" style="width:170px;" size="small"  suffix-icon="el-icon-s-promotion"></el-input>

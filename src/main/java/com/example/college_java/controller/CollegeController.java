@@ -29,19 +29,18 @@ public class CollegeController {
     @RequestMapping("first")
     public List<college> findAllFromFirstSchool(String type,int page){
         int pageCount = 20;
-//        System.out.println(page);
         return collegeMapper.findAllFromFirst(type,page,pageCount);
+    }    @RequestMapping("firstlen")
+    public List<college> findAllFromFirstSchoollen(String type,int page){
+        int pageCount = 20;
+        return collegeMapper.findAllFromFirstlen(type,page,pageCount);
     }
 
     @RequestMapping("second")
     public List<college> findAllFromSecond(String province,int page){
-//        System.out.println(111);
-//        System.out.println(province);
-//        System.out.println(2222);
-//        System.out.println(page);
-//        System.out.println(3333);
         int pageCount = 20;
         return collegeMapper.findAllFromSecond(province,page,pageCount);}
+
     @RequestMapping("countPlace")
     public int countPlace(String type){
         return collegeMapper.countPlace(type);
@@ -49,7 +48,6 @@ public class CollegeController {
 
     @RequestMapping("countProvince")
     public int countProvince(String province){
-//        System.out.println(province);
         return collegeMapper.countProvince(province);
     }
 }

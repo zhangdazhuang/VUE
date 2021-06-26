@@ -1,4 +1,3 @@
-<!--  -->
 <template>
   <el-menu :router=true :default-active="$route.name" unique-opened=true>
           <el-submenu index="1">

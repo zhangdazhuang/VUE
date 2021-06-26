@@ -7,8 +7,8 @@
             </svg>
             <font style="font-size:15px">教育部全国高校名单(截至{{updateTime}})</font>
           </td> <td style="width= 15%; text-align:right; height:35px;font-size:19px">  
-          <span  @click="changeSchool()"><router-link to=""><font style="font-size:15px">按高校查询</font></router-link></span>   | 
-          <span @click="changePlace()"><router-link to=""><font style="font-size:15px">按地区查询</font></router-link></span>  
+          <span @click="changeSchool()"><router-link to=""><font style="font-size:15px">按高校查询</font></router-link></span>  |
+          <span  @click="changePlace()"><router-link to=""><font style="font-size:15px">按地区查询</font></router-link></span>    
         </td> 
       </tr>
     </table>
@@ -41,7 +41,7 @@
   export default {
     data(){
       return{
-        show: true,    
+        show: false,    
         updateTime:""    
       }
     },
@@ -50,10 +50,12 @@
     },
     methods: {
       changePlace(){
-        Bus.$emit('show', true)
+        Bus.$emit('show', false)
+        Bus.$emit('yemian_page',1)
       },
       changeSchool(){
-        Bus.$emit('show', false)
+        Bus.$emit('show', true)
+        Bus.$emit('yemian_page',1)
       },
     },
     mounted(){     

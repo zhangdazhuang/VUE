@@ -24,9 +24,9 @@
           <a :href="scope.row.link" target="_blank"> {{scope.row.schoolname}}</a>
         </template>
     </el-table-column>
-    <el-table-column prop="province" label="所在地区" width="130" align="center"> </el-table-column>
-    <el-table-column prop="city" label="城市" width="100" align="center"> </el-table-column>
-    <el-table-column prop="department" label="主管部门" width="150" align="center"> </el-table-column>
+    <el-table-column prop="province" label="所在地区" width="140" align="center"> </el-table-column>
+    <el-table-column prop="city" label="城市" width="130" align="center"> </el-table-column>
+    <el-table-column prop="department" label="主管部门" width="155" align="center"> </el-table-column>
     <el-table-column prop="level" label="办学层次" width="80" align="center"> </el-table-column>
     <el-table-column prop="type" label="办学类型" width="200" align="center"> </el-table-column>
   </el-table>
@@ -50,7 +50,7 @@ import '../assets/font/iconfont.js'
   export default {
     data() {
       return {
-        total:62,  
+        total: 120,  
         page: 0,
         yemian_page:1,
         show: true,
@@ -75,6 +75,7 @@ import '../assets/font/iconfont.js'
     created() {
       Bus.$on('yemian_page', val=> {    //接收数据（参数名称，参数）
         this.yemian_page = val
+        this.page = val -1
         this.show = false;//让分页隐藏
         this.$nextTick(() => {//重新渲染分页
           this.show = true
@@ -115,6 +116,11 @@ import '../assets/font/iconfont.js'
     mounted () {
       this.$http('http://localhost:1426/college/first?type='+this.val_flag+'&page='+this.page).then(res => {
         this.tableData = res.data
+      })
+      this.$http('http://localhost:1426/college/firstlen?type='+this.val_flag+'&page='+this.page).then(res => {
+        this.total = res.data.length
+        // console.log(this.total)
+        // console.log(res.data[this.total-1])
       })
     },
     methods: {

@@ -4,6 +4,7 @@
         <td width="20%" style="padding-right:20px;vertical-align:top; ">
           <place-query v-if="show"/>    <!-- 左上角查询栏-->
           <menu-query v-else/>
+          <!-- <test v-else/> -->
         </td>
         <td width="100%">
           <router-view/>
@@ -22,18 +23,20 @@
 <script>
 import menuQuery from './menuQuery.vue'
 import PlaceQuery from './placeQuery.vue'
+import Test from './About.vue'
 import Bus from '../bus'
 export default {
   data() {
     return {
         total:42,
         page: 0,
-        show: true,
+        show: false,
      }
   },
   components:{
-      menuQuery,
-      PlaceQuery     //按地区查询
+      PlaceQuery,
+      menuQuery,    //按地区查询           
+      Test
   },
   created() {
       Bus.$on('show', val => {
