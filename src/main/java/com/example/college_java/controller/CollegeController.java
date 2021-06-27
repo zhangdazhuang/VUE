@@ -27,13 +27,13 @@ public class CollegeController {
     }
 
     @RequestMapping("first")
-    public List<college> findAllFromFirstSchool(String type,int page){
+    public List<college> findAllFromFirstSchool(int page){
         int pageCount = 20;
-        return collegeMapper.findAllFromFirst(type,page,pageCount);
-    }    @RequestMapping("firstlen")
-    public List<college> findAllFromFirstSchoollen(String type,int page){
-        int pageCount = 20;
-        return collegeMapper.findAllFromFirstlen(type,page,pageCount);
+        return collegeMapper.findAllFromFirst(page,pageCount);
+    }
+    @RequestMapping("firstlen")
+    public int findAllFromFirstSchoollen(){
+        return collegeMapper.findAllFromFirstlen();
     }
 
     @RequestMapping("second")
@@ -50,4 +50,18 @@ public class CollegeController {
     public int countProvince(String province){
         return collegeMapper.countProvince(province);
     }
+
+    @RequestMapping("bytype")
+    public List<college> findbytype(String type,int page){
+        int pageCount = 20;
+        return collegeMapper.bytype(type,page,pageCount);}
+
+    @RequestMapping("keyword")
+    public List<college> findbykeyword(String keyword,int page){
+        int pageCount = 20;
+        return collegeMapper.findbykeyword(keyword,page,pageCount);}
+
+    @RequestMapping("keywordlen")
+    public int findbykeywordlen(String keyword){
+        return collegeMapper.findbykeywordlen(keyword);}
 }

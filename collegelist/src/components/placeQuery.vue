@@ -18,7 +18,9 @@ import Bus from '../bus'
     },
     methods: {
       onSubmit() {
-        Bus.$emit('place', this.place)
+        // Bus.$emit('place', this.place)
+        Bus.$emit('yemian_page', 1)
+        Bus.$emit('keyword', this.place)
       }
     }
   }

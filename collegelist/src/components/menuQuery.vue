@@ -1,13 +1,13 @@
 <template>
-  <el-menu :router=true :default-active="$route.name" unique-opened=true>
+  <el-menu :router=true :default-active="$route.name" :unique-opened=true>
           <el-submenu index="1">
-            <template slot="title"><i class="el-icon-chicken"></i>高校类型</template>
+            <template slot="title"><i class="el-icon-plus"></i>高校类型</template>
             <el-menu-item-group v-for="(value, key, index) in elData" :key='index'>
               <el-menu-item :index="value.path" @click="getData(value)">{{value.name}}</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <el-submenu index="2">
-            <template slot="title"><i class="el-icon-chicken"></i>所在地区</template>
+            <template slot="title"><i class="el-icon-plus"></i>所在地区</template>
             <el-menu-item-group v-for="(value, key, index) in elPlaceData" :key='index' >
               <el-menu-item index="" @click="getPlaceData(value)" v-on:="">{{value.name}}</el-menu-item>
             </el-menu-item-group>
@@ -138,23 +138,28 @@ export default {
     getData(value){
       if(value.name == '一流学校')
       {
+        Bus.$emit('yemian_page', 1)
         Bus.$emit('name', '一流大学')
       }
       else if(value.name == '985高校'){
+        Bus.$emit('yemian_page', 1)
         Bus.$emit('name', '985')
       }
       else if(value.name == '211高校'){
+        Bus.$emit('yemian_page', 1)
         Bus.$emit('name', '211')
       }
       else
       {
+        Bus.$emit('yemian_page', 1)
         Bus.$emit('name', value.name)
       }
       Bus.$emit('yemian_page', 1)
     },
     getPlaceData(value){
-      Bus.$emit('place', value.name)
       Bus.$emit('yemian_page', 1)
+      Bus.$emit('place', value.name)
+      
     }
   },
 }

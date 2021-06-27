@@ -21,7 +21,7 @@
     <!-- <el-table-column prop="schoolname" label="学校名称" width="170" align="center">  -->
     <el-table-column label="学校名称" width="180" align="center"> 
         <template slot-scope="scope">   <!--通过表格模板设置超链接，通过 Scoped slot 可以获取到 row, column, $index 和 store，row.link获取数据 -->
-          <a :href="scope.row.link" target="_blank"> {{scope.row.schoolname}}</a>
+          <a class = link  :href="scope.row.link" target="_blank"> {{scope.row.schoolname}}</a>
         </template>
     </el-table-column>
     <el-table-column prop="province" label="所在地区" width="140" align="center"> </el-table-column>
@@ -42,6 +42,9 @@
     fill: currentColor;
     overflow: hidden;
   }
+  .link{
+    color: rgb(85, 118, 228);  
+  }
 
 </style>
 <script>
@@ -50,13 +53,13 @@ import '../assets/font/iconfont.js'
   export default {
     data() {
       return {
-        total: 120,  
+        total: 12,  
         page: 0,
         yemian_page:1,
         show: true,
-        val_flag: '一流大学',
+        val_flag: '',
         placeList:'北京市四川省天津市河北省山西省内蒙古自治区辽宁省吉林省黑龙江省上海市江苏省浙江省安徽省福建省江西省山东省河南省湖北省湖南省广东省广西壮族自治区海南省重庆市贵州省云南省西藏自治区陕西省甘肃省青海省新疆维吾尔自治区',
-        schoolList:['一流学校','一流学科','985高校','211高校'],
+        schoolList:'一流学校一流大学一流学科985高校211高校',
         tableData: [],
         test:[],
         tableLabel: {
@@ -81,46 +84,68 @@ import '../assets/font/iconfont.js'
           this.show = true
         })
       })// http://localhost:1426/college/first?type=一流大学&page=0
-      Bus.$on('name', val => {
+
+      Bus.$on('name', val => { //类型查
         this.val_flag = val 
-        this.$http('http://localhost:1426/college/first?type='+this.val_flag+'&page='+this.page).then(res => {
+        console.log("type",this.val_flag)
+        this.$http('http://localhost:1426/college/bytype?type='+this.val_flag+'&page='+this.page).then(res => {
             this.tableData = res.data
         })
         this.$http('http://localhost:1426/college/countPlace?type='+this.val_flag).then(res => {
             this.total = res.data
         })
+        // console.log("test",this.val_flag)
+        // console.log("testq",this.total)
       })
-      Bus.$on('place', val =>{
+      Bus.$on('place', val =>{  //省份查
         this.val_flag = val  
+        console.log("province",this.val_flag) 
         this.$http('http://localhost:1426/college/second?province='+this.val_flag+'&page='+this.page).then(res => {
             this.tableData = res.data
           })
         this.$http('http://localhost:1426/college/countProvince?province='+this.val_flag).then(res => {
-            this.total = res.data
+            this.total = res.data -20 
           })
       })
-      Bus.$on('page', val=>{
+      Bus.$on('keyword', val =>{  //按关键字查询  
+        this.val_flag = val  
+        console.log("keyword",this.val_flag) 
+        this.$http('http://localhost:1426/college/keyword?keyword='+this.val_flag+'&page='+this.page).then(res => {
+            this.tableData = res.data
+          })
+        this.$http('http://localhost:1426/college/keywordlen?keyword='+this.val_flag).then(res => {
+            this.total = res.data -20 
+          })
+      })
+      Bus.$on('page', val=>{ //分页查        
         this.page = val
         if(this.placeList.indexOf(this.val_flag) > -1){
+          console.log("all and province 分页",this.val_flag)  //分页全查，分页省份查 
           this.$http('http://localhost:1426/college/second?province='+this.val_flag+'&page='+this.page).then(res => {
             this.tableData = res.data
           })
         }
-        else {  //if(this.schoolList.indexOf(this.val_flag) > -1)
-          this.$http('http://localhost:1426/college/first?type='+this.val_flag+'&page='+this.page).then(res => {
+        else if(this.schoolList.indexOf(this.val_flag) > -1 && this.schoolList.indexOf(this.val_flag) != 6){
+          console.log("flag",this.schoolList.indexOf(this.val_flag))
+          console.log("type",this.val_flag)  //分页类型查
+          this.$http('http://localhost:1426/college/bytype?type='+this.val_flag+'&page='+this.page).then(res => {
             this.tableData = res.data
         })
         }
+        else{ //分页关键词查
+        console.log("keyword 分页",this.val_flag) 
+        this.$http('http://localhost:1426/college/keyword?keyword='+this.val_flag+'&page='+this.page).then(res => {
+            this.tableData = res.data
+          })
+        }
       })
     },
-    mounted () {
-      this.$http('http://localhost:1426/college/first?type='+this.val_flag+'&page='+this.page).then(res => {
+    mounted () {  //全查
+      this.$http('http://localhost:1426/college/first?page='+this.page).then(res => {
         this.tableData = res.data
       })
-      this.$http('http://localhost:1426/college/firstlen?type='+this.val_flag+'&page='+this.page).then(res => {
-        this.total = res.data.length
-        // console.log(this.total)
-        // console.log(res.data[this.total-1])
+      this.$http('http://localhost:1426/college/firstlen').then(res => {
+        this.total = res.data - 20
       })
     },
     methods: {
@@ -128,9 +153,9 @@ import '../assets/font/iconfont.js'
         return index + 1;
       },
       changerPage(page){
-        Bus.$emit('page', page-1)
+        // console.log('page',page)
+        Bus.$emit('page', (page-1)*20)
       }
     },
-    
   }
 </script>
