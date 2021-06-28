@@ -100,11 +100,11 @@ import '../assets/font/iconfont.js'
       Bus.$on('place', val =>{  //省份查
         this.val_flag = val  
         console.log("province",this.val_flag) 
-        this.$http('http://localhost:1426/college/second?province='+this.val_flag+'&page='+this.page).then(res => {
+        this.$http('http://localhost:1426/college/province?province='+this.val_flag+'&page='+this.page).then(res => {
             this.tableData = res.data
           })
         this.$http('http://localhost:1426/college/countProvince?province='+this.val_flag).then(res => {
-            this.total = res.data -20 
+            this.total = res.data  
           })
       })
       Bus.$on('keyword', val =>{  //按关键字查询  
@@ -114,14 +114,14 @@ import '../assets/font/iconfont.js'
             this.tableData = res.data
           })
         this.$http('http://localhost:1426/college/keywordlen?keyword='+this.val_flag).then(res => {
-            this.total = res.data -20 
+            this.total = res.data  
           })
       })
       Bus.$on('page', val=>{ //分页查        
         this.page = val
         if(this.placeList.indexOf(this.val_flag) > -1){
           console.log("all and province 分页",this.val_flag)  //分页全查，分页省份查 
-          this.$http('http://localhost:1426/college/second?province='+this.val_flag+'&page='+this.page).then(res => {
+          this.$http('http://localhost:1426/college/province?province='+this.val_flag+'&page='+this.page).then(res => {
             this.tableData = res.data
           })
         }
@@ -141,11 +141,11 @@ import '../assets/font/iconfont.js'
       })
     },
     mounted () {  //全查
-      this.$http('http://localhost:1426/college/first?page='+this.page).then(res => {
+      this.$http('http://localhost:1426/college/all?page='+this.page).then(res => {
         this.tableData = res.data
       })
-      this.$http('http://localhost:1426/college/firstlen').then(res => {
-        this.total = res.data - 20
+      this.$http('http://localhost:1426/college/alllen').then(res => {
+        this.total = res.data - 0
       })
     },
     methods: {

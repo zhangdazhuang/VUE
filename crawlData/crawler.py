@@ -1,9 +1,22 @@
 import requests
 import json
-import os
+import pymysql
 
-from dataset import DataManager
-db = DataManager()
+conn = pymysql.connect(host='localhost', user='root', password='123456', database='vuework', port=3306)
+cursor = conn.cursor()
+def save_dataset(sql, data):
+    '''
+    parm:
+    sql: 格式化的sql语句
+    data: 将要处理的数据   
+    return:      
+    ''' 
+    try:
+        cursor.execute(sql, data)  ## 单行插入数据
+        conn.commit()              ## 提交执行
+    except Exception as e:
+        print(f"数据插入出现错误！错误类型：{e.__class__.__name__},错误明细:{e}")
+        conn.rollback()    # 回滚
 
 ## https://www.cingta.com/school/ser  ## 原网址 
 ## 在网址中发现所需数据请求来自于 https://www.cingta.com/school/api/name_uni_list/
@@ -40,5 +53,7 @@ for each in data['data']['list']:
     alldata = (lineid, code, schoolname, province, city, department, level, type, link)
 
     sql = 'insert into collegesList(lineid, code, schoolname, province, city, department, level, type, link) values(%s, %s, %s, %s, %s, %s, %s, %s, %s);'
-    db.save_data(sql, alldata)
+    save_dataset(sql, alldata)
 
+cursor.close()
+conn.close()

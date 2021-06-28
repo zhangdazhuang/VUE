@@ -36,7 +36,7 @@
 </style>
 
 <script>
-  import SchoolQuery from './components/schoolQuery.vue' 
+  import Allschoollist from './components/Allschoollist.vue' 
   import Bus from './bus'
   export default {
     data(){
@@ -46,7 +46,7 @@
       }
     },
     components:{
-      Add:SchoolQuery
+      Add:Allschoollist
     },
     methods: {
       changePlace(){
