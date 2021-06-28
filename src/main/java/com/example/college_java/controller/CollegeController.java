@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.util.List;
 
-@RestController //设置方法返回值为字符串
+@RestController //设置方法返回值类型
 @RequestMapping("college") //访问路径
 @CrossOrigin //处理数据跨域
 
